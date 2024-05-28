@@ -1,7 +1,7 @@
 {
-  "name": "practice_react2_formik",
+  "name": "goit-react-hw-02",
   "version": "0.1.0",
-  "homepage": "https://Aleksandr-Kovshar.github.io/practice_react2_formik",
+  "homepage": "https://Aleksandr-Kovshar.github.io/goit-react-hw-02",
   "private": false,
   "dependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.24.1",
