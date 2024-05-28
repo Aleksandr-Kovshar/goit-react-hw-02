@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import LoginForm from "./components/LoginForm";
-import ProductReviewForm from "./components/ProductReviewForm";
+import Feedback from "./components/Feedback";
+// import Phonebook from "./components/Phonebook";
 
 class App extends Component {
   state = {};
@@ -9,11 +9,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <LoginForm />
-        <br />
-        <br />
-        <br />
-        <ProductReviewForm />
+        <Feedback />
+        {/* <Phonebook /> */}
       </div>
     );
   }
