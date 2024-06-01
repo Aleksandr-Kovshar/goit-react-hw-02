@@ -1,20 +1,21 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { FeedbackBox, Button, ListStatistics } from "./Feedback.styled";
+import Section from "./Section";
+import FeedbackOptions from "./FeedbackOptions";
+import Statistics from "./Statistics";
 
 class Feedback extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
+    verybad: 1,
   };
 
-  handleAddFeedback = (e) => {
-    console.log(e.target.name);
-    const nameButton = e.target.name;
+  handleAddFeedback = (option) => {
+    console.log(option);
 
     this.setState((prevState) => ({
-      [nameButton]: prevState[nameButton] + 1,
+      [option]: prevState[option] + 1,
     }));
   };
 
@@ -24,36 +25,34 @@ class Feedback extends Component {
 
   countPositiveFeedbackPercentage = ({ good, neutral, bad }) => {
     const totalFeedback = this.countTotalFeedback({ good, neutral, bad });
-    return totalFeedback === 0 ? 0 : ((good + neutral) / totalFeedback) * 100;
+    return totalFeedback === 0
+      ? 0
+      : Math.round(((good + neutral) / totalFeedback) * 100);
   };
 
   render() {
-    return (
-      <FeedbackBox>
-        <h1>Please leave feedback</h1>
-        <div>
-          <Button type="button" name="good" onClick={this.handleAddFeedback}>
-            Good
-          </Button>
-          <Button type="button" name="neutral" onClick={this.handleAddFeedback}>
-            Neutral
-          </Button>
-          <Button type="button" name="bad" onClick={this.handleAddFeedback}>
-            Bad
-          </Button>
-        </div>
+    const options = Object.keys(this.state);
 
-        <ListStatistics>
-          <li>Good: {this.state.good}</li>
-          <li>Neutral: {this.state.neutral}</li>
-          <li>Bad:{this.state.bad}</li>
-          <li>Total: {this.countTotalFeedback(this.state)}</li>
-          <li>
-            Positive feedback:
-            {this.countPositiveFeedbackPercentage(this.state)}
-          </li>
-        </ListStatistics>
-      </FeedbackBox>
+    return (
+      <>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={options}
+            onLeaveFeedback={this.handleAddFeedback}
+          />
+        </Section>
+        <Section title="Statistics">
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback(this.state)}
+            positivePercentage={this.countPositiveFeedbackPercentage(
+              this.state
+            )}
+          />
+        </Section>
+      </>
     );
   }
 }
