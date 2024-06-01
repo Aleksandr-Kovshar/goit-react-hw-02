@@ -8,7 +8,6 @@ class Feedback extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    verybad: 1,
   };
 
   handleAddFeedback = (option) => {
